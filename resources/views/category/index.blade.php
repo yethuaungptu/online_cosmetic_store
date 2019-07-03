@@ -14,7 +14,7 @@
             <div class="col-sm-12">
                 <h1 class="display-3">Category Add</h1>
                 <div>
-                    <a style="margin: 19px;" href="{{ route('category.create')}}" class="btn btn-primary">New menu</a>
+                    <a style="margin: 19px;" href="{{ route('category.create')}}" class="btn btn-primary">New category</a>
                 </div>
                 <table class="table table-striped">
                     <thead>

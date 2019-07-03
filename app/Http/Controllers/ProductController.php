@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Brand;
+use App\Category;
+use App\Product;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class ProductController extends Controller
 {
@@ -13,7 +17,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::all();
+        return view ('product.index',compact('products'));
     }
 
     /**
@@ -23,7 +28,11 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        $brands = Brand::all();
+        $product = new Product();
+
+        return view('product.create',compact('categories','brands','product'));
     }
 
     /**
@@ -32,53 +41,65 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        $product = Product::create($this->validateRequest());
+        $this->storeImage($product);
+        $product->save();
+        return redirect('product')->with('success', 'Product inserted!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+
+
+    public function show(Product $product)
     {
-        //
+        return view('product.show',compact('product'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+
+    public function edit(Product $product)
     {
-        //
+        $categories = Category::all();
+        $brands = Brand::all();
+        return view('product.edit',compact('product','categories','brands'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+
+    public function update(Product $product)
     {
-        //
+        $product->update($this->validateRequest());
+        $this->storeImage($product);
+        return redirect('/product')->with('success', 'Product updated!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+
+    public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return redirect('/product')->with('success', 'Product Deleted!');
+    }
+    private function validateRequest()
+    {
+        return request()->validate([
+            'name' => 'required|min:3',
+            'price' => 'required|numeric',
+            'count' => 'required|numeric',
+            'quantity' => 'required|numeric',
+            'desc' => 'required|min:3',
+            'category_id' => 'required',
+            'brand_id' => 'required',
+            'image' => 'sometimes|file|image|max:5000',
+        ]);
+    }
+
+    private function storeImage($product)
+    {
+        if (request()->has('image')){
+            $product->update([
+                'image' => request()->image->store('uploads', 'public')
+            ]);
+        }
+        $image =Image::make(public_path('storage/' . $product->image))->fit(200,200);
+        $image -> save();
     }
 }

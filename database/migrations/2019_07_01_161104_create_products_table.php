@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->integer('quantity');
             $table->integer('price');
             $table->string('desc');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->integer('count');
             $table->unsignedInteger('brand_id');
             $table->unsignedInteger('category_id');
