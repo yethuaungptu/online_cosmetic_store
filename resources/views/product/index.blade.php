@@ -23,7 +23,7 @@
                     <th>Quantity</th>
                     <th>Price</th>
                     <th>Description</th>
-                    <th>Count</th>
+                    <th>Sale Count</th>
                     <th>Brand</th>
                     <th>Category</th>
                     <th colspan="2" class="text-center">Action</th>
@@ -32,12 +32,12 @@
                     <tbody>
                     @foreach($products as $product)
                         <tr>
-                            <td><a href="/product/{{$product->id}}">{{$product->id}}</a></td>
+                            <td><a href="/admin/product/{{$product->id}}">{{$product->id}}</a></td>
                             <td>{{$product->name}}</td>
                             <td>{{$product->quantity}}</td>
                             <td>{{$product->price}}</td>
                             <td>{{$product->desc}}</td>
-                            <td>{{$product->count}}</td>
+                            <td>{{$product->sale_count}}</td>
                             <td>{{$product->brand->name}}</td>
                             <td>{{$product->category->name}}</td>
                             <td>

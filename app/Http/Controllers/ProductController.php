@@ -46,7 +46,7 @@ class ProductController extends Controller
         $product = Product::create($this->validateRequest());
         $this->storeImage($product);
         $product->save();
-        return redirect('product')->with('success', 'Product inserted!');
+        return redirect('admin/product')->with('success', 'Product inserted!');
     }
 
 
@@ -69,21 +69,21 @@ class ProductController extends Controller
     {
         $product->update($this->validateRequest());
         $this->storeImage($product);
-        return redirect('/product')->with('success', 'Product updated!');
+        return redirect('admin/product')->with('success', 'Product updated!');
     }
 
 
     public function destroy(Product $product)
     {
         $product->delete();
-        return redirect('/product')->with('success', 'Product Deleted!');
+        return redirect('admin/product')->with('success', 'Product Deleted!');
     }
     private function validateRequest()
     {
         return request()->validate([
             'name' => 'required|min:3',
             'price' => 'required|numeric',
-            'count' => 'required|numeric',
+            'sale_count' => 'required|numeric',
             'quantity' => 'required|numeric',
             'desc' => 'required|min:3',
             'category_id' => 'required',
@@ -99,7 +99,7 @@ class ProductController extends Controller
                 'image' => request()->image->store('uploads', 'public')
             ]);
         }
-        $image =Image::make(public_path('storage/' . $product->image))->fit(200,200);
+        $image =Image::make(public_path('storage/' . $product->image))->fit(600,800);
         $image -> save();
     }
 }

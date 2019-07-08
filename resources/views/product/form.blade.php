@@ -1,5 +1,5 @@
 @csrf
-<input type="hidden" name="count" value="{{( $product->count) ? $product->count:0}}">
+<input type="hidden" name="sale_count" value="{{( $product->sale_count) ? $product->sale_count:0}}">
 <div class="form-group">
     <label for="name">Name</label>
     <input type="text" name="name" value="{{old('name') ?? $product->name}}" class="form-control">

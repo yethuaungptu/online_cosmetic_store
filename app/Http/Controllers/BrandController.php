@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Brand;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class BrandController extends Controller
 {
@@ -35,13 +36,14 @@ class BrandController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
         $brand = Brand::create($this->validateRequest());
+        $this->storeImage($brand);
 
         $brand->save();
 
-        return redirect('brand')->with('success', 'Brand inserted!');
+        return redirect('admin/brand')->with('success', 'Brand inserted!');
     }
 
     /**
@@ -55,12 +57,7 @@ class BrandController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(Brand $brand)
     {
         return view('brands.edit',compact('brand'));
@@ -71,7 +68,9 @@ class BrandController extends Controller
     {
         $brand->update($this->validateRequest());
 
-        return redirect('brand/')->with('success', 'Brand updated!');
+        $this->storeImage($brand);
+
+        return redirect('admin/brand/')->with('success', 'Brand updated!');
     }
 
 
@@ -79,12 +78,23 @@ class BrandController extends Controller
     {
         $brand->delete();
 
-        return redirect('brand')->with('success', 'Brand deleted!');
+        return redirect('admin/brand')->with('success', 'Brand deleted!');
     }
     private function validateRequest()
     {
         return request()->validate([
             'name' => 'required|min:3',
+            'image' => 'sometimes|file|image|max:5000',
         ]);
+    }
+    private function storeImage($brand)
+    {
+        if (request()->has('image')){
+            $brand->update([
+                'image' => request()->image->store('uploads', 'public')
+            ]);
+        }
+        $image =Image::make(public_path('storage/' . $brand->image))->fit(250,170);
+        $image -> save();
     }
 }

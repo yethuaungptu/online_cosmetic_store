@@ -19,7 +19,7 @@
                     <p><strong>Price : </strong> {{ $product->price }}</p>
                     <p><strong>Brand : </strong> {{ $product->brand->name }}</p>
                     <p><strong>Category : </strong> {{ $product->category->name }}</p>
-                    <p><strong>Count : </strong> {{ $product->count }}</p>
+                    <p><strong>Count : </strong> {{ $product->sale_count }}</p>
                     <p><strong>Description : </strong> {{ $product->desc }}</p>
                 </div>
 

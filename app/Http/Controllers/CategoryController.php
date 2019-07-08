@@ -41,7 +41,7 @@ class CategoryController extends Controller
 
         $category->save();
 
-        return redirect('category')->with('success', 'Category inserted!');
+        return redirect('admin/category')->with('success', 'Category inserted!');
     }
 
     /**
@@ -65,7 +65,7 @@ class CategoryController extends Controller
     {
         $category->update($this->validateRequest());
 
-        return redirect('category/')->with('success', 'Category updated!');
+        return redirect('admin/category/')->with('success', 'Category updated!');
     }
 
 
@@ -73,7 +73,7 @@ class CategoryController extends Controller
     {
         $category->delete();
 
-        return redirect('category')->with('success', 'Category deleted!');
+        return redirect('admin/category')->with('success', 'Category deleted!');
     }
     private function validateRequest()
     {

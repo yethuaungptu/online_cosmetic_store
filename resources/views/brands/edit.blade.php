@@ -12,7 +12,7 @@
 
         <div class="row">
             <div class="col-12">
-                <form action="{{ route('brand.update', ['brand' => $brand]) }}" method="POST">
+                <form action="{{ route('brand.update', ['brand' => $brand]) }}" method="POST" enctype="multipart/form-data">
                     @method('PATCH')
                     @csrf
                     <div class="form-group">
@@ -20,6 +20,13 @@
                         <input type="text" name="name" value="{{old('name') ?? $brand->name}}" class="form-control">
                         <div>
                             {{ $errors->first('name') }}
+                        </div>
+                    </div>
+                    <div class="form-group d-flex flex-column">
+                        <label for="image">Product Image</label>
+                        <input type="file" name="image"  class="form-control">
+                        <div>
+                            {{ $errors->first('image') }}
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Update Brand</button>

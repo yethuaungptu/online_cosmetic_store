@@ -20,6 +20,7 @@
                     <thead>
                     <th>ID</th>
                     <th>Name</th>
+                    <th>Logo</th>
                     <th colspan="2" class="text-center">Action</th>
 
                     </thead>
@@ -28,6 +29,11 @@
                         <tr>
                             <td>{{$brand->id}}</td>
                             <td>{{$brand->name}}</td>
+                            <td>
+                                @if($brand->image)
+                                    <img src="{{ asset('storage/' . $brand->image) }}" alt="" width="70" height="70" class="img-thumbnail">
+                                @endif
+                            </td>
                             <td>
                                 <a href="{{ route('brand.edit',$brand->id)}}" class="btn btn-primary">Edit</a>
                             </td>
