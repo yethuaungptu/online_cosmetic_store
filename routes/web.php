@@ -16,6 +16,15 @@ Route::get('/customer/cart/{id}','CustomerController@cart');
 Route::get('/customer/removeP/{id}','CustomerController@remove');
 Route::get('/product/detail/{id}','CustomerController@pdetail');
 Route::get('/products','CustomerController@list');
+Route::get('/customer/cartview', 'CustomerController@cartview');
+Route::get('/customer/checkout', 'CustomerController@checkout');
+Route::get('/customer/login', 'CustomerController@login');
+Route::get('/customer/register', 'CustomerController@register');
+Route::post('/customer/register', 'CustomerController@registerUser');
+Route::post('/customer/login', 'CustomerController@loginUser');
+Route::get('/customer/logout', 'CustomerController@logout');
+Route::post('/customer/cart', 'CustomerController@cartS');
+Route::get('/customer/invoice','CustomerController@invoice');
 
 Route::get('/clear','CustomerController@clear');
 

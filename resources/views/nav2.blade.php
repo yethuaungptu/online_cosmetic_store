@@ -20,6 +20,36 @@
     <script src="{{ asset('javascript/common.js') }}" type="text/javascript"></script>
     <script src="{{ asset('javascript/global.js') }}" type="text/javascript"></script>
     <script src="{{ asset('owl-carousel/owl.carousel.min.js') }}" type="text/javascript"></script>
+    <style>
+        .cart-plus-minus {
+            border: 1px solid #cccccc;
+            height: 25px;
+            text-align: center;
+            width: 90px;
+            color: #666666;
+        }
+        .qtybutton {
+            background: #cccccc none repeat scroll 0 0;
+            height: 100%;
+            width: 30%;
+        }
+        .dec.qtybutton {
+            float: left;
+        }
+        .inc.qtybutton {
+            float: right;
+        }
+        input.cart-plus-minus-box {
+            background: transparent none repeat scroll 0 0;
+            box-shadow: none;
+            font-family: roboto;
+            height: 100%;
+            margin-bottom: 0;
+            padding: 0;
+            text-align: center;
+            width: 40%;
+        }
+    </style>
 </head>
 <body>
 <div class="preloader loader" style="display: block;"> <img src="{{ asset('image/loader.gif') }}"  alt="#"/></div>
@@ -31,12 +61,21 @@
                     <div class="top-right pull-right">
                         <div id="top-links" class="nav pull-right">
                             <ul class="list-inline">
-                                <li class="dropdown"><a href="#" title="My Account" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <span>My Account</span> <span class="caret"></span></a>
-                                    <ul class="dropdown-menu dropdown-menu-right">
-                                        <li><a href="register.html">Register</a></li>
-                                        <li><a href="login.html">Login</a></li>
-                                    </ul>
-                                </li>
+                                @if(session('customer_key'))
+                                    <li class="dropdown"><a href="#" title="My Account" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <span>{{ session('customer_key')[0][0] }}</span> <span class="caret"></span></a>
+                                        <ul class="dropdown-menu dropdown-menu-right">
+                                            <li><a href="{{ url('/customer/logout') }}">Logout</a></li>
+                                        </ul>
+                                    </li>
+                                @else
+                                    <li class="dropdown"><a href="#" title="My Account" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <span>My Account</span> <span class="caret"></span></a>
+                                        <ul class="dropdown-menu dropdown-menu-right">
+                                            <li><a href="{{ url('/customer/register') }}">Register</a></li>
+                                            <li><a href="{{ url('/customer/login') }}">Login</a></li>
+                                        </ul>
+                                    </li>
+                                @endif
+
                                 <li><a href="#" id="wishlist-total" title="Wish List (0)"><i class="fa fa-heart"></i> <span>Wish List</span><span> (0)</span></a></li>
                             </ul>
                         </div>
@@ -94,7 +133,7 @@
                             </li>
                             <li>
                                 <div>
-                                    <p class="text-center"> <span class="btn-viewcart"><a href="#"><strong><i class="fa fa-shopping-cart"></i> View Cart</strong></a></span> </p>
+                                    <p class="text-center"> <span class="btn-viewcart"><a href="{{ url('customer/cartview') }}"><strong><i class="fa fa-shopping-cart"></i> View Cart</strong></a></span> </p>
                                 </div>
                             </li>
                         @else

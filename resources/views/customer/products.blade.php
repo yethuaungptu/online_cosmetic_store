@@ -127,7 +127,7 @@
                             <div class="button-group">
                                 <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
                                 @if(in_array($product->id,request()->session()->get('cart')??[]))
-                                    <a role="button" id="button-cart" href="#" class="btn btn-primary btn-lg btn-block addtocart" >Go To Cart</a>
+                                    <a role="button" id="button-cart" href="{{ url('customer/cartview') }}" class="btn btn-primary btn-lg btn-block addtocart" >Go To Cart</a>
                                 @else
                                     <a role="button" id="button-cart" href="{{ url('/customer/cart/'.$product->id) }}" class="btn btn-primary btn-lg btn-block addtocart" >Add To Cart</a>
                                 @endif
