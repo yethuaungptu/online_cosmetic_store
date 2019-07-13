@@ -1,4 +1,5 @@
 @include('nav2');
+
 <style>
     #invoice{
         padding: 30px;
@@ -166,40 +167,41 @@
         }
     }
 </style>
+<script src="{{ asset('js/print.min.js') }}"></script>
 <div class="container">
     <ul class="breadcrumb">
         <li><a href="{{ url('/') }}"><i class="fa fa-home"></i></a></li>
         <li><a href="{{ url('/customer/cartview') }}">Shopping Cart</a></li>
         <li><a href="{{ url('/customer/checkout') }}">Checkout</a></li>
     </ul>
+    @if(session('customer_key') && \App\Order::where('customer_id',session('customer_key')[0][1]))
     <div class="row">
         <div id="invoice">
 
             <div class="toolbar hidden-print">
                 <div class="text-right">
                     <button id="printInvoice" class="btn btn-info"><i class="fa fa-print"></i> Print</button>
-                    <button class="btn btn-info"><i class="fa fa-file-pdf-o"></i> Export as PDF</button>
                 </div>
                 <hr>
             </div>
-            <div class="invoice overflow-auto">
+            <div class="invoice overflow-auto" id="printArea">
                 <div style="min-width: 600px">
                     <header>
                         <div class="row">
                             <div class="col">
-                                <a target="_blank" href="https://lobianijs.com">
-                                    <img src="http://lobianijs.com/lobiadmin/version/1.0/ajax/img/logo/lobiadmin-logo-text-64.png" data-holder-rendered="true" />
+                                <a target="_blank" href="#">
+                                    <img src="{{ asset('image/logo.png') }}" data-holder-rendered="true" class="img-thumbnail img-responsive"/>
                                 </a>
                             </div>
                             <div class="col company-details">
                                 <h2 class="name">
-                                    <a target="_blank" href="https://lobianijs.com">
-                                        Arboshiki
+                                    <a target="_blank" href="#">
+                                        Three Lay
                                     </a>
                                 </h2>
-                                <div>455 Foggy Heights, AZ 85004, US</div>
+                                <div>No7. Yal Pu San Street, Aung Chan Thar Quart, Pyay</div>
                                 <div>(123) 456-789</div>
-                                <div>company@example.com</div>
+                                <div>threelady@example.com</div>
                             </div>
                         </div>
                     </header>
@@ -207,87 +209,62 @@
                         <div class="row contacts">
                             <div class="col invoice-to">
                                 <div class="text-gray-light">INVOICE TO:</div>
-                                <h2 class="to">John Doe</h2>
-                                <div class="address">796 Silver Harbour, TX 79273, US</div>
-                                <div class="email"><a href="mailto:john@example.com">john@example.com</a></div>
+                                <h2 class="to">{{ session('customer_key')[0][0] }}</h2>
+                                <div class="address">{{ \App\Customer::find(session('customer_key')[0][1])->address }}</div>
+                                <div class="email"><a href="mailto:{{ \App\Customer::find(session('customer_key')[0][1])->email }}">{{ \App\Customer::find(session('customer_key')[0][1])->email }}</a></div>
                             </div>
                             <div class="col invoice-details">
-                                <h1 class="invoice-id">INVOICE 3-2-1</h1>
-                                <div class="date">Date of Invoice: 01/10/2018</div>
-                                <div class="date">Due Date: 30/10/2018</div>
+                                <h1 class="invoice-id">INVOICE {{ \App\Order::where('customer_id',session('customer_key')[0][1])->latest('created_at')->get()[0]['id'] }}</h1>
+                                <div class="date">Date of Invoice: {{ \App\Order::where('customer_id',session('customer_key')[0][1])->latest('created_at')->get()[0]['created_at'] }}</div>
+{{--                                <div class="date">Due Date: 30/10/2018</div>--}}
                             </div>
                         </div>
+                        {{ count(\App\Order::where('customer_id',session('customer_key')[0][1])->get()[0]['cart']) }}
                         <table border="0" cellspacing="0" cellpadding="0">
                             <thead>
                             <tr>
-                                <th>#</th>
-                                <th class="text-left">DESCRIPTION</th>
-                                <th class="text-right">HOUR PRICE</th>
-                                <th class="text-right">HOURS</th>
+                                <th>ID</th>
+                                <th class="text-left">PRODUCT NAME</th>
+                                <th class="text-left">CATEGORY</th>
+                                <th class="text-right">PRICE</th>
+                                <th class="text-right">QUANTITY</th>
                                 <th class="text-right">TOTAL</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td class="no">04</td>
-                                <td class="text-left"><h3>
-                                        <a target="_blank" href="https://www.youtube.com/channel/UC_UMEcP_kF0z4E6KbxCpV1w">
-                                            Youtube channel
-                                        </a>
-                                    </h3>
-                                    <a target="_blank" href="https://www.youtube.com/channel/UC_UMEcP_kF0z4E6KbxCpV1w">
-                                        Useful videos
-                                    </a>
-                                    to improve your Javascript skills. Subscribe and stay tuned :)
-                                </td>
-                                <td class="unit">$0.00</td>
-                                <td class="qty">100</td>
-                                <td class="total">$0.00</td>
-                            </tr>
-                            <tr>
-                                <td class="no">01</td>
-                                <td class="text-left"><h3>Website Design</h3>Creating a recognizable design solution based on the company's existing visual identity</td>
-                                <td class="unit">$40.00</td>
-                                <td class="qty">30</td>
-                                <td class="total">$1,200.00</td>
-                            </tr>
-                            <tr>
-                                <td class="no">02</td>
-                                <td class="text-left"><h3>Website Development</h3>Developing a Content Management System-based Website</td>
-                                <td class="unit">$40.00</td>
-                                <td class="qty">80</td>
-                                <td class="total">$3,200.00</td>
-                            </tr>
-                            <tr>
-                                <td class="no">03</td>
-                                <td class="text-left"><h3>Search Engines Optimization</h3>Optimize the site for search engines (SEO)</td>
-                                <td class="unit">$40.00</td>
-                                <td class="qty">20</td>
-                                <td class="total">$800.00</td>
-                            </tr>
+                            @foreach(\App\Order::where('customer_id',session('customer_key')[0][1])->latest('created_at')->get()[0]['cart'] as $i=>$id)
+                                <tr>
+                                    <td class="no">{{ \App\Product::find($id['product_id'])->id }}</td>
+                                    <td class="text-left">{{ \App\Product::find($id['product_id'])->name}}</td>
+                                    <td class="text-left">{{ \App\Product::find($id['product_id'])->category->name}}</td>
+                                    <td class="unit">{{ \App\Product::find($id['product_id'])->price}} Ks</td>
+                                    <td class="qty">{{ $id['count']}}</td>
+                                    <td class="total">{{ \App\Product::find($id['product_id'])->price * $id['count'] }} Ks</td>
+                                </tr>
+                            @endforeach
                             </tbody>
                             <tfoot>
                             <tr>
-                                <td colspan="2"></td>
+                                <td colspan="3"></td>
                                 <td colspan="2">SUBTOTAL</td>
-                                <td>$5,200.00</td>
+                                <td>{{ \App\Order::where('customer_id',session('customer_key')[0][1])->latest('created_at')->get()[0]['total_price'] }} Ks</td>
                             </tr>
                             <tr>
-                                <td colspan="2"></td>
-                                <td colspan="2">TAX 25%</td>
-                                <td>$1,300.00</td>
+                                <td colspan="3"></td>
+                                <td colspan="2">Shipping Fee (Not include)</td>
+                                <td> 0 Ks</td>
                             </tr>
                             <tr>
-                                <td colspan="2"></td>
+                                <td colspan="3"></td>
                                 <td colspan="2">GRAND TOTAL</td>
-                                <td>$6,500.00</td>
+                                <td>{{ \App\Order::where('customer_id',session('customer_key')[0][1])->latest('created_at')->get()[0]['total_price'] }} Ks</td>
                             </tr>
                             </tfoot>
                         </table>
                         <div class="thanks">Thank you!</div>
                         <div class="notices">
                             <div>NOTICE:</div>
-                            <div class="notice">A finance charge of 1.5% will be made on unpaid balances after 30 days.</div>
+                            <div class="notice">Shipping Fee will be pay when you take your delivery </div>
                         </div>
                     </main>
                     <footer>
@@ -300,16 +277,19 @@
         </div>
 
     </div>
+        @else
+        <h1 class="text-center text-info">Not Invoice Available</h1>
+    @endif
 </div>
 </div>
 <script>
     $('#printInvoice').click(function(){
-        Popup($('.invoice')[0].outerHTML);
-        function Popup(data)
-        {
-            window.print();
-            return true;
-        }
+        printJS({
+            printable: 'printArea',
+            type: 'html',
+            targetStyles: ['*']
+        })
     });
 </script>
+
 @include('footer')

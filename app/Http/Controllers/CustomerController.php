@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Brand;
 use App\Category;
 use App\Customer;
+use App\Order;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -110,15 +111,35 @@ class CustomerController extends Controller
         return view('/customer/invoice');
     }
 
-    private function validateRequest()
-    {
-        return request()->validate([
-            'name' => 'required|min:3',
-            'email' => 'required|email',
-            'phone' => 'required|min:11',
-            'address' => 'required',
-            'city' => 'required',
-            'password' => 'required|min:5',
-        ]);
+    public function confirm(Request $request){
+         $cart = [];
+         foreach ($request->session('cart')->get('cart') as $i=>$id){
+             array_push($cart,array('product_id'=>$id,'count'=>$request->session('cart')->get('count')['count'.$i]));
+
+         }
+        $customer = Customer::find($request->session('cart')->get('customer_key')[0][1]);
+        if ($request->get('shipping_address')=='new'){
+            $request ->validate([
+                'name' => 'required|min:3',
+                'address' => 'required',
+                'city' => 'required',
+            ]);
+        }
+         $order = new Order([
+             'total_price' => $request->session('cart')->get('count')['sub_tol'],
+             'customer_id' => $customer->id,
+             'cart' => $cart,
+             'name' => ($request->get('shipping_address')=='existing')? $customer->name : $request->get('name'),
+             'city' =>  ($request->get('shipping_address')=='existing')? $customer->city : $request->get('city'),
+             'address' => ($request->get('shipping_address')=='existing')? $customer->address : $request->get('address'),
+         ]);
+
+        $order->save();
+
+        $request->session()->forget('count');
+        $request->session()->forget('cart');
+
+        return redirect('/customer/invoice');
+
     }
 }

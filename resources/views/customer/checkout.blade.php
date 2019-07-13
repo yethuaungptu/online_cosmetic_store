@@ -59,7 +59,8 @@
                     </div>
                     <div id="collapse-shipping-address" role="heading" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
                         <div class="panel-body">
-                            <form class="form-horizontal">
+                            <form class="form-horizontal" name="frm" action="{{ url('customer/confirm') }}" method="post">
+                                @csrf
                                 <div class="radio">
                                     <label>
                                         <input type="radio" checked="checked" value="existing" name="shipping_address">
@@ -97,11 +98,7 @@
                                     </div>
 
                                 </div>
-                                <div class="buttons clearfix">
-                                    <div class="pull-right">
-                                        <input type="button" class="btn btn-primary" data-loading-text="Loading..." id="button-shipping-address" value="Continue">
-                                    </div>
-                                </div>
+
                             </form>
                             <script type="text/javascript">
                                 $('input[name=\'shipping_address\']').on('change', function() {
@@ -164,7 +161,7 @@
                             </div>
                             <div class="buttons">
                                 <div class="pull-right">
-                                    <input type="button" data-loading-text="Loading..." class="btn btn-primary" id="button-confirm" value="Confirm Order">
+                                    <input type="button" data-loading-text="Loading..." onclick="confirmO();" class="btn btn-primary" id="button-confirm" value="Confirm Order">
                                 </div>
                             </div>
                         </div>
@@ -175,4 +172,9 @@
         </div>
     </div>
 </div>
+<script>
+    function confirmO() {
+        frm.submit();
+    }
+</script>
 @include('footer')

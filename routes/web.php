@@ -25,6 +25,7 @@ Route::post('/customer/login', 'CustomerController@loginUser');
 Route::get('/customer/logout', 'CustomerController@logout');
 Route::post('/customer/cart', 'CustomerController@cartS');
 Route::get('/customer/invoice','CustomerController@invoice');
+Route::post('/customer/confirm','CustomerController@confirm');
 
 Route::get('/clear','CustomerController@clear');
 
