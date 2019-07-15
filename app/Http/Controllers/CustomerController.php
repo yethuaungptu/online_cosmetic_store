@@ -14,8 +14,9 @@ class CustomerController extends Controller
 {
     public function home(){
         $brands  = Brand::all();
-        $products = Product::all();
-        return view('customer.home',compact('brands','products'));
+        $productsLa = Product::orderBy('created_at','desc')->limit(5)->get();
+        $productsBe = Product::orderBy('sale_count','desc')->limit(5)->get();
+        return view('customer.home',compact('brands','productsBe','productsLa'));
     }
     public function cart($id,Request $request){
         $request->session()->push('cart', $id);
@@ -78,16 +79,22 @@ class CustomerController extends Controller
 
         $customer->save();
 
-        return redirect('/');
+        return redirect('/customer/login');
     }
 
     public function loginUser(Request $request){
         $customer = Customer::where('email',$request->input('email'))->first();
         if ($customer && Hash::check($request->input('password'),$customer->password)){
             $request->session()->push('customer_key',collect([$customer->name,$customer->id]));
-            if ($request->input('para')){
+
+            if ( session('count')){
+                return redirect('/customer/checkout');
+
+            }elseif ($request->input('para')){
                 return back();
-            }else{
+
+            }
+            else{
                 return redirect('/');
             }
 
@@ -115,22 +122,24 @@ class CustomerController extends Controller
          $cart = [];
          foreach ($request->session('cart')->get('cart') as $i=>$id){
              array_push($cart,array('product_id'=>$id,'count'=>$request->session('cart')->get('count')['count'.$i]));
-
+            Product::where('id',$id)->increment('sale_count',(int)$request->session('cart')->get('count')['count'.$i]);
+             Product::where('id',$id)->decrement('quantity',(int)$request->session('cart')->get('count')['count'.$i]);
          }
         $customer = Customer::find($request->session('cart')->get('customer_key')[0][1]);
         if ($request->get('shipping_address')=='new'){
             $request ->validate([
                 'name' => 'required|min:3',
                 'address' => 'required',
-                'city' => 'required',
+                'phone' => 'required|min:11',
             ]);
         }
          $order = new Order([
              'total_price' => $request->session('cart')->get('count')['sub_tol'],
              'customer_id' => $customer->id,
              'cart' => $cart,
+             'status' => 'new',
              'name' => ($request->get('shipping_address')=='existing')? $customer->name : $request->get('name'),
-             'city' =>  ($request->get('shipping_address')=='existing')? $customer->city : $request->get('city'),
+             'phone' =>  ($request->get('shipping_address')=='existing')? $customer->phone : $request->get('phone'),
              'address' => ($request->get('shipping_address')=='existing')? $customer->address : $request->get('address'),
          ]);
 

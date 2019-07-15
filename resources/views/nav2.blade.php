@@ -94,7 +94,7 @@
             </div>
             <div class="col-sm-4 col-xs-6 header-middle">
                 <div class="header-middle-top">
-                    <div id="logo"> <a href="index.html"><img src="{{ asset('image/logo2.gif') }}" title="E-Commerce" width="60%" alt="E-Commerce" class="img-responsive" /></a> </div>
+                    <div id="logo"> <a href="index.html"><img src="{{ asset('image/logo2.gif') }}" title="E-Commerce" width="60%" alt="E-Commerce" class="img-responsive img-thumbnail" /></a> </div>
                 </div>
             </div>
             <div class="col-sm-4 col-xs-6 header-right">
@@ -156,7 +156,6 @@
                 <li><a href="{{url('/')}}"   class="parent"  >Home</a> </li>
                 <li><a href="{{url('/products')}}"   class="parent"  >All Product</a> </li>
                 <li><a href="#" >About us</a></li>
-                <li><a href="#" >Contact Us</a> </li>
             </ul>
         </div>
     </div>

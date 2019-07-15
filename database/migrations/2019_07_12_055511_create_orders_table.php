@@ -18,7 +18,8 @@ class CreateOrdersTable extends Migration
             $table->integer('total_price');
             $table->string('address');
             $table->string('name');
-            $table->string('city');
+            $table->string('phone');
+            $table->string('status');
             $table->unsignedInteger('customer_id');
             $table->json('cart');
             $table->timestamps();

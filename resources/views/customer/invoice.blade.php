@@ -184,6 +184,35 @@
                 </div>
                 <hr>
             </div>
+            <div class="row">
+            <div class="col-sm-4 company-details">
+                <h2 class="name">
+                    <a target="_blank" href="#">
+                        KBZ
+                    </a>
+                </h2>
+                <div>Myo Thiri</div>
+                <div> <span class="bg-primary">Account No</span> 1234567890123</div>
+            </div>
+            <div class="col-sm-4 company-details">
+                <h2 class="name">
+                    <a target="_blank" href="#">
+                        AYA
+                    </a>
+                </h2>
+                <div>Nan Thiri</div>
+                <div><span class="bg-danger">Account No</span> 1234567890123</div>
+            </div>
+                <div class="col-sm-4 company-details">
+                    <h2 class="name">
+                        <a target="_blank" href="#">
+                            CB
+                        </a>
+                    </h2>
+                    <div>Hnin Htet Htet Nay Nwe</div>
+                    <div><span class="bg-info">Account No</span> 1234567890123</div>
+                </div>
+            </div>
             <div class="invoice overflow-auto" id="printArea">
                 <div style="min-width: 600px">
                     <header>
@@ -209,9 +238,9 @@
                         <div class="row contacts">
                             <div class="col invoice-to">
                                 <div class="text-gray-light">INVOICE TO:</div>
-                                <h2 class="to">{{ session('customer_key')[0][0] }}</h2>
-                                <div class="address">{{ \App\Customer::find(session('customer_key')[0][1])->address }}</div>
-                                <div class="email"><a href="mailto:{{ \App\Customer::find(session('customer_key')[0][1])->email }}">{{ \App\Customer::find(session('customer_key')[0][1])->email }}</a></div>
+                                <h2 class="to">{{ \App\Order::where('customer_id',session('customer_key')[0][1])->latest('created_at')->get()[0]['name'] }}</h2>
+                                <div class="address">{{ \App\Order::where('customer_id',session('customer_key')[0][1])->latest('created_at')->get()[0]['address'] }}</div>
+                                <div class="email"><a href="mailto:{{ \App\Customer::find(session('customer_key')[0][1])->email }}">{{ \App\Customer::find(session('customer_key')[0][1])->phone }}</a></div>
                             </div>
                             <div class="col invoice-details">
                                 <h1 class="invoice-id">INVOICE {{ \App\Order::where('customer_id',session('customer_key')[0][1])->latest('created_at')->get()[0]['id'] }}</h1>
@@ -219,7 +248,6 @@
 {{--                                <div class="date">Due Date: 30/10/2018</div>--}}
                             </div>
                         </div>
-                        {{ count(\App\Order::where('customer_id',session('customer_key')[0][1])->get()[0]['cart']) }}
                         <table border="0" cellspacing="0" cellpadding="0">
                             <thead>
                             <tr>

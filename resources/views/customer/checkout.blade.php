@@ -91,9 +91,9 @@
                                         </div>
                                     </div>
                                     <div class="form-group required">
-                                        <label for="input-shipping-city" class="col-sm-2 control-label">City</label>
+                                        <label for="input-shipping-city" class="col-sm-2 control-label">Phone</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-shipping-city" placeholder="City" value="" name="city">
+                                            <input type="text" class="form-control" id="input-shipping-phone" placeholder="Phone Number" value="" name="phone">
                                         </div>
                                     </div>
 
