@@ -27,7 +27,7 @@
                                             Register Account</label>
                                     </div>
                                     <p>By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.</p>
-                                    <a href="{{ url('customer/login') }}"><input type="button" class="btn btn-primary" data-loading-text="Loading..." id="button-account" value="Continue"></a>
+                                    <a href="{{ url('customer/register') }}"><input type="button" class="btn btn-primary" data-loading-text="Loading..." id="button-account" value="Continue"></a>
                                 </div>
                             <form action="{{ url('customer/login') }}" method="post">
                                 @csrf

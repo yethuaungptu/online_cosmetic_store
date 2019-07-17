@@ -1,3 +1,4 @@
+
 @extends('layouts.app2')
 
 @section('content')
@@ -71,36 +72,54 @@
         <!--Page Title-->
         <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
         <div class="pageheader">
-            <h3><i class="fa fa-briefcase"></i> Product </h3>
+            <h3><i class="fa fa-users"></i> Customer List </h3>
             <div class="breadcrumb-wrapper">
                 <span class="label">You are here:</span>
                 <ol class="breadcrumb">
                     <li> <a href="{{ url('admin/home') }}"> Home </a> </li>
-                    <li class="active"> Product </li>
+                    <li class="active"> Customer List </li>
                 </ol>
             </div>
         </div>
         <div id="page-content">
-        <div class="row">
-            <div class="col-sm-8 offset-sm-2">
-                <h1 class="display-3">Add a Product</h1>
-                <div>
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Customer Lists</h3>
+                        </div>
+                        <div class="panel-body">
+                            <table id="demo-dt-selection" class="table table-striped table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Address</th>
+                                    <th class="min-tablet">Phone</th>
+                                    <th class="min-desktop">Order Count</th>
+                                    <th class="min-desktop">Total Order Amount</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($customers as $customer)
+                                    <tr>
+                                        <td>{{ $customer->name }}</td>
+                                        <td>{{ $customer->email }}</td>
+                                        <td>{{ $customer->address }}</td>
+                                        <td>{{ $customer->phone }}</td>
+                                        <td>{{ \App\Order::where('customer_id',$customer->id)->count() }}</td>
+                                        <td>{{ \App\Order::where('customer_id',$customer->id)->sum('total_price') }} Ks</td>
+                                    </tr>
                                 @endforeach
-                            </ul>
-                        </div><br />
-                    @endif
-                    <form method="post" action="{{ route('product.store') }}" enctype="multipart/form-data">
-                        @include('product.form')
-                        <button type="submit" class="btn btn-primary">Add Product</button>
-                    </form>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
+    <script>
+
+    </script>
 @endsection

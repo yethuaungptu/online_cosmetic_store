@@ -225,7 +225,7 @@
                             <div class="col company-details">
                                 <h2 class="name">
                                     <a target="_blank" href="#">
-                                        Three Lay
+                                        Three Lady
                                     </a>
                                 </h2>
                                 <div>No7. Yal Pu San Street, Aung Chan Thar Quart, Pyay</div>
@@ -240,7 +240,7 @@
                                 <div class="text-gray-light">INVOICE TO:</div>
                                 <h2 class="to">{{ \App\Order::where('customer_id',session('customer_key')[0][1])->latest('created_at')->get()[0]['name'] }}</h2>
                                 <div class="address">{{ \App\Order::where('customer_id',session('customer_key')[0][1])->latest('created_at')->get()[0]['address'] }}</div>
-                                <div class="email"><a href="mailto:{{ \App\Customer::find(session('customer_key')[0][1])->email }}">{{ \App\Customer::find(session('customer_key')[0][1])->phone }}</a></div>
+                                <div class="email"><a href="#">{{ \App\Customer::find(session('customer_key')[0][1])->phone }}</a></div>
                             </div>
                             <div class="col invoice-details">
                                 <h1 class="invoice-id">INVOICE {{ \App\Order::where('customer_id',session('customer_key')[0][1])->latest('created_at')->get()[0]['id'] }}</h1>

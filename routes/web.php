@@ -37,6 +37,11 @@ Route::get('/admin', function () {
 Auth::routes();
 
 Route::get('/admin/home', 'HomeController@index')->name('home');
+Route::get('/admin/orders', 'AdminController@orders')->middleware('auth');
+Route::get('/admin/orderN', 'AdminController@orderN')->middleware('auth');
+Route::get('/admin/order/{id}', 'AdminController@detail')->middleware('auth');
+Route::post('/admin/order', 'AdminController@updateO')->middleware('auth');
+Route::get('/admin/customers', 'AdminController@customers')->middleware('auth');
 Route::resource('admin/category','CategoryController')->middleware('auth');
 Route::resource('admin/brand','BrandController')->middleware('auth');
 Route::resource('admin/product','ProductController')->middleware('auth');

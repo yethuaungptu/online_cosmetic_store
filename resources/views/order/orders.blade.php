@@ -1,3 +1,4 @@
+
 @extends('layouts.app2')
 
 @section('content')
@@ -71,36 +72,69 @@
         <!--Page Title-->
         <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
         <div class="pageheader">
-            <h3><i class="fa fa-briefcase"></i> Product </h3>
+            <h3><i class="fa fa-shopping-cart"></i> Order </h3>
             <div class="breadcrumb-wrapper">
                 <span class="label">You are here:</span>
                 <ol class="breadcrumb">
                     <li> <a href="{{ url('admin/home') }}"> Home </a> </li>
-                    <li class="active"> Product </li>
+                    <li class="active"> Order </li>
                 </ol>
             </div>
         </div>
         <div id="page-content">
-        <div class="row">
-            <div class="col-sm-8 offset-sm-2">
-                <h1 class="display-3">Add a Product</h1>
-                <div>
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Product Order</h3>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-hover table-vcenter">
+                                <thead>
+                                <tr>
+                                    <th>Invoice</th>
+                                    <th>Buyer</th>
+                                    <th class="text-center">Amount</th>
+                                    <th class="hidden-xs">Ordered date</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($orders as $order)
+                                    <tr>
+                                    <td>Order #{{ $order->id }}</td>
+                                    <td>
+                                        <span class="text-semibold">{{ $order->customer->name }}</span>
+                                    </td>
+                                    <td class="text-center">{{ $order->total_price }} Ks</td>
+                                    <td class="hidden-xs">{{ $order->created_at }}</td>
+                                    <td>
+                                        @if($order->status == 'new')
+                                            <div class="label label-table label-warning">New</div>
+                                        @elseif($order->status == 'confirm')
+                                            <div class="label label-table label-primary">Confirm</div>
+                                        @elseif($order->status == 'shipped')
+                                            <div class="label label-table label-info">Shipped</div>
+                                        @elseif($order->status == 'complete')
+                                            <div class="label label-table label-success">Completed</div>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a href="{{ url('admin/order/'.$order->id) }}" role="button" class="btn btn-primary"> Detail</a>
+                                    </td>
+                                </tr>
                                 @endforeach
-                            </ul>
-                        </div><br />
-                    @endif
-                    <form method="post" action="{{ route('product.store') }}" enctype="multipart/form-data">
-                        @include('product.form')
-                        <button type="submit" class="btn btn-primary">Add Product</button>
-                    </form>
+                                </tbody>
+                            </table>
+                            {{ $orders->links() }}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
+    <script>
+
+    </script>
 @endsection
