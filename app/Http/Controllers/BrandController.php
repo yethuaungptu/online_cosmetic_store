@@ -94,7 +94,8 @@ class BrandController extends Controller
                 'image' => request()->image->store('uploads', 'public')
             ]);
         }
-        $image =Image::make(public_path('storage/' . $brand->image))->fit(250,170);
+//        $image =Image::make(public_path('storage/' . $brand->image))->fit(250,170);
+        $image =Image::make('storage/' . $brand->image)->fit(250,170);
         $image -> save();
     }
 }
