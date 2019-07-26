@@ -355,7 +355,7 @@ header {
 }
 #cart .btn-viewcart a, #cart .btn-checkout a {
 	color: #fff;
-	background: #FE3E65;
+	background: #25a79f;
 	display: inline-block;
 	padding: 6px 15px;
 }
@@ -699,7 +699,7 @@ footer ul li {
 }
 .btn-primary {
 	color: #ffffff;
-	background: #FE3E65;
+	background: #25a79f;
 	border: none;
 	float: left;
 }
@@ -963,7 +963,7 @@ h2.price {
 	cursor: pointer;
 }
 .product-thumb .button-group .addtocart-btn {
-	background: #FE3E65;
+	background: #25a79f;
 	display: inline-block;
 	padding: 8px 20px;
 	font-weight:500;
@@ -1175,7 +1175,7 @@ h2.price {
 }
 
 .tab a.selected, .tab a:hover {
-	background: #FE3E65;
+	background: #25a79f;
 	color: #fff;
 }
 .customtab-inner {
@@ -1318,7 +1318,7 @@ ul.main-navigation > li.menu-last ul ul {
 }
 .column-left .columnblock-title,  .column-right .columnblock-title {
 	font-size: 18px;
-	background: #FE3E65;
+	background: #25a79f;
 	color: #fff;
 	margin: 0;
 	padding: 13px 20px 11px;
@@ -1640,7 +1640,7 @@ ul.main-navigation > li.menu-last ul ul {
 	font-size: 18px;
 }
 .btn-list-grid #list-view.active .fa, .btn-list-grid #grid-view.active .fa,  .btn-list-grid #list-view:hover .fa, .btn-list-grid #grid-view:hover .fa {
-	color: #FE3E65;
+	color: #25a79f;
 }
 .category-page-wrapper .form-control {
 	padding: 0;

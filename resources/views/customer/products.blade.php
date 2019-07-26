@@ -11,7 +11,7 @@
                 <div class="category_block">
                     <ul class="box-category treeview-list treeview">
                         @foreach($categories as $category)
-                            <li><a href="#">{{ $category->name }}</a></li>
+                            <li><a href="{{ url('/productsCat/'.$category->id) }}">{{ $category->name }}</a></li>
                         @endforeach
                     </ul>
                 </div>
@@ -21,42 +21,32 @@
                 <div class="category_block">
                     <ul class="box-category treeview-list treeview">
                         @foreach($brands as $brand)
-                            <li><a href="#">{{ $brand->name }}</a></li>
+                            <li><a href="{{ url('/productsBnd/'. $brand->id) }}">{{ $brand->name }}</a></li>
                         @endforeach
                     </ul>
                 </div>
             </div>
             <div class="panel panel-default filter">
                 <div class="panel-heading columnblock-title">Refine Search</div>
+                <form action="/refineS">
                 <div class="filter-block">
                     <div class="list-group"> <a class="list-group-item">Brand</a>
                         <div class="list-group-item">
                             <div id="filter-group1">
                                 @foreach($brands as $brand)
                                     <label class="checkbox">
-                                        <input name="filter[]" type="checkbox" value="{{ $brand->id }}" />
+                                        <input name="brand" {{ ($brand->id == request()->query('brand'))? 'checked' : '' }} type="radio" value="{{ $brand->id }}" required/>
                                         {{ $brand->name }}
                                     </label>
                                 @endforeach
                             </div>
                         </div>
-{{--                        <a class="list-group-item">Price</a>--}}
-{{--                        <div class="list-group-item">--}}
-{{--                            <div id="filter-group2">--}}
-{{--                                <label class="checkbox">--}}
-{{--                                    <input name="filter[]" type="checkbox" value="4" />--}}
-{{--                                    $100-$300 (6)</label>--}}
-{{--                                <label class="checkbox">--}}
-{{--                                    <input name="filter[]" type="checkbox" value="5" />--}}
-{{--                                    $301-$1000 (6)</label>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
                         <a class="list-group-item">Category</a>
                         <div class="list-group-item">
                             <div id="filter-group3">
                                 @foreach($categories as $category)
                                     <label class="checkbox">
-                                        <input name="filter[]" type="checkbox" value="{{ $category->id }}" />
+                                        <input name="category" type="radio" value="{{ $category->id }}" {{ ($category->id == request()->query('category'))? 'checked' : '' }} required/>
                                         {{ $category->name }}
                                     </label>
                                 @endforeach
@@ -64,16 +54,17 @@
                         </div>
                     </div>
                     <div class="panel-footer text-right">
-                        <button type="button" id="button-filter" class="btn btn-primary">Refine Search</button>
+                        <button type="submit" id="button-filter" class="btn btn-primary">Refine Search</button>
                     </div>
                 </div>
+                </form>
             </div>
         </div>
         <div id="content" class="col-sm-9">
-            <h2 class="category-title">All Product</h2>
+            <h2 class="category-title"> {{ request()->query('category')? 'Refine Search' : 'All Product' }}</h2>
             <div class="row category-banner">
                 <div class="col-sm-12 category-image"><img src="{{ asset('image/allproduct.png') }}" alt="Desktops" title="Desktops" class="img-thumbnail" /></div>
-                <div class="col-sm-12 category-desc">In this page will show the all product. You can search with name, category and brands.Also you can search with Refine search.For view options, you can switch list view and grid view</div>
+                <div class="col-sm-12 category-desc">{{ request()->query('category')? 'In this page, you can see the product which you search with refine search. Result from, Category : ('.\App\Category::find(request()->query('category'))->name.') category And Brand : ('.\App\Brand::find(request()->query('brand'))->name.') brand' : 'In this page will show the all product. You can search with name, category and brands.Also you can search with Refine search.For view options, you can switch list view and grid view' }}</div>
             </div>
             <div class="category-page-wrapper">
                 <div class="col-md-6 list-grid-wrapper">
@@ -82,34 +73,7 @@
                         <button type="button" id="grid-view" class="btn btn-default grid" data-toggle="tooltip" title="Grid"><i class="fa fa-th"></i></button>
                     </div>
                 </div>
-                <div class="col-md-1 text-right page-wrapper">
-                    <label class="control-label" for="input-limit">Show :</label>
-                    <div class="limit">
-                        <select id="input-limit" class="form-control">
-                            <option value="8" selected="selected">8</option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                            <option value="75">75</option>
-                            <option value="100">100</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-2 text-right sort-wrapper">
-                    <label class="control-label" for="input-sort">Sort By :</label>
-                    <div class="sort-inner">
-                        <select id="input-sort" class="form-control">
-                            <option value="ASC" selected="selected">Default</option>
-                            <option value="ASC">Name (A - Z)</option>
-                            <option value="DESC">Name (Z - A)</option>
-                            <option value="ASC">Price (Low &gt; High)</option>
-                            <option value="DESC">Price (High &gt; Low)</option>
-                            <option value="DESC">Rating (Highest)</option>
-                            <option value="ASC">Rating (Lowest)</option>
-                            <option value="ASC">Model (A - Z)</option>
-                            <option value="DESC">Model (Z - A)</option>
-                        </select>
-                    </div>
-                </div>
+
             </div>
             <br />
             <div class="grid-list-wrapper">
@@ -152,14 +116,9 @@
                 @endforeach
             </div>
             <div class="category-page-wrapper">
-                <div class="result-inner">Showing 1 to 8 of 10 (2 Pages)</div>
+                <div class="result-inner">Showing {{ $products->firstItem() }} to {{ $products->lastItem() }} of {{ $products->total() }} ({{ ceil($products->total()/12) }} Pages)</div>
                 <div class="pagination-inner">
-                    <ul class="pagination">
-                        <li class="active"><span>1</span></li>
-                        <li><a href="category.html">2</a></li>
-                        <li><a href="category.html">&gt;</a></li>
-                        <li><a href="category.html">&gt;|</a></li>
-                    </ul>
+                    {{ $products->links() }}
                 </div>
             </div>
         </div>

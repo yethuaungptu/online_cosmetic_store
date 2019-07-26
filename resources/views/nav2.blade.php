@@ -89,7 +89,7 @@
             <div class="col-sm-4 col-xs-6 header-left">
                 <div class="shipping">
                     <div class="shipping-img"></div>
-                    <div class="shipping-text">+91(000)1234-1234<span class="shipping-detail">Week From 9:00am To 7:00pm</span></div>
+                    <div class="shipping-text">+959683434349<span class="shipping-detail">Week From 9:00am To 7:00pm</span></div>
                 </div>
             </div>
             <div class="col-sm-4 col-xs-6 header-middle">
@@ -155,7 +155,8 @@
             <ul class="main-navigation">
                 <li><a href="{{url('/')}}"   class="parent"  >Home</a> </li>
                 <li><a href="{{url('/products')}}"   class="parent"  >All Product</a> </li>
-                <li><a href="#" >About us</a></li>
+                <li><a href="#" >Contact us</a></li>
+                <li><a href="{{ url('customer/invoice') }}" >Last Invoice</a></li>
             </ul>
         </div>
     </div>

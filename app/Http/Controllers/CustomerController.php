@@ -42,7 +42,7 @@ class CustomerController extends Controller
     public function list(){
         $categories = Category::all();
         $brands = Brand::all();
-        $products = Product::all();
+        $products = Product::paginate(12);
         return view('customer.products',compact('categories','brands','products'));
     }
     public function cartview(Request $request){
@@ -150,5 +150,22 @@ class CustomerController extends Controller
 
         return redirect('/customer/invoice');
 
+    }
+    public function procat($id){
+        $products = Product::where('category_id',$id)->paginate(12);
+        $category = Category::find($id);
+        return view('customer.category',compact('products','category'));
+    }
+
+    public function probnd($id){
+        $products = Product::where('brand_id',$id)->paginate(12);
+        $brand = Brand::find($id);
+        return view('customer.brand',compact('products','brand'));
+    }
+    public function refine(Request $request){
+        $categories = Category::all();
+        $brands = Brand::all();
+        $products = Product::where('category_id',$request->query('category'))->where('brand_id',$request->query('brand'))->paginate(100);
+        return view('customer.products',compact('categories','brands','products'));
     }
 }
