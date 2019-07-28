@@ -86,7 +86,7 @@
                 <div class="col-lg-12">
                     <div class="panel">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Member Customer Lists</h3>
+                            <h3 class="panel-title">Normal Customer Lists</h3>
                         </div>
                         <div class="panel-body">
                             <table id="demo-dt-selection" class="table table-striped table-bordered">
@@ -102,7 +102,7 @@
                                 </thead>
                                 <tbody>
                                 @foreach($customers as $customer)
-                                    @if(\App\Order::where('customer_id',$customer->id)->count() <= 0) @continue @endif
+                                    @if(\App\Order::where('customer_id',$customer->id)->count() > 0) @continue @endif
                                     <tr>
                                         <td>{{ $customer->name }}</td>
                                         <td>{{ $customer->email }}</td>

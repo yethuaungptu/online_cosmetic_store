@@ -11,7 +11,7 @@
                 <div class="category_block">
                     <ul class="box-category treeview-list treeview">
                         @foreach($categories as $category)
-                            <li><a href="{{ url('/productsCat/'.$category->id) }}">{{ $category->name }}</a></li>
+                            <li><b><a href="{{ url('/productsCat/'.$category->id) }}">{{ $category->name }}</a></b></li>
                         @endforeach
                     </ul>
                 </div>
@@ -21,7 +21,7 @@
                 <div class="category_block">
                     <ul class="box-category treeview-list treeview">
                         @foreach($brands as $brand)
-                            <li><a href="{{ url('/productsBnd/'. $brand->id) }}">{{ $brand->name }}</a></li>
+                            <li><b><a href="{{ url('/productsBnd/'. $brand->id) }}">{{ $brand->name }}</a></b></li>
                         @endforeach
                     </ul>
                 </div>
@@ -36,7 +36,7 @@
                                 @foreach($brands as $brand)
                                     <label class="checkbox">
                                         <input name="brand" {{ ($brand->id == request()->query('brand'))? 'checked' : '' }} type="radio" value="{{ $brand->id }}" required/>
-                                        {{ $brand->name }}
+                                        <b>{{ $brand->name }}</b>
                                     </label>
                                 @endforeach
                             </div>
@@ -47,7 +47,7 @@
                                 @foreach($categories as $category)
                                     <label class="checkbox">
                                         <input name="category" type="radio" value="{{ $category->id }}" {{ ($category->id == request()->query('category'))? 'checked' : '' }} required/>
-                                        {{ $category->name }}
+                                        <b>{{ $category->name }}</b>
                                     </label>
                                 @endforeach
                             </div>

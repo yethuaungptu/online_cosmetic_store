@@ -19,29 +19,7 @@
                             @endif
 
                         </div>
-{{--                        <div id="product-thumbnail" class="owl-carousel">--}}
-{{--                            <div class="item">--}}
-{{--                                <div class="image-additional"><a class="thumbnail  " href="{{ asset('image/product/product1.jpg') }}" title="lorem ippsum dolor dummy"> <img src="{{ asset('image/product/pro-1-220x294.jpg') }}" title="lorem ippsum dolor dummy" alt="lorem ippsum dolor dummy" /></a></div>--}}
-{{--                            </div>--}}
-{{--                            <div class="item">--}}
-{{--                                <div class="image-additional"><a class="thumbnail  " href="{{ asset('image/product/product2.jpg') }}" title="lorem ippsum dolor dummy"> <img src="{{ asset('image/product/pro-2-220x294.jpg') }}" title="lorem ippsum dolor dummy" alt="lorem ippsum dolor dummy" /></a></div>--}}
-{{--                            </div>--}}
-{{--                            <div class="item">--}}
-{{--                                <div class="image-additional"><a class="thumbnail  " href="{{ asset('image/product/product3.jpg') }}" title="lorem ippsum dolor dummy"> <img src="{{ asset('image/product/pro-3-220x294.jpg') }}" title="lorem ippsum dolor dummy" alt="lorem ippsum dolor dummy" /></a></div>--}}
-{{--                            </div>--}}
-{{--                            <div class="item">--}}
-{{--                                <div class="image-additional"><a class="thumbnail  " href="{{ asset('image/product/product4.jpg') }}" title="lorem ippsum dolor dummy"> <img src="{{ asset('image/product/pro-4-220x294.jpg') }}" title="lorem ippsum dolor dummy" alt="lorem ippsum dolor dummy" /></a></div>--}}
-{{--                            </div>--}}
-{{--                            <div class="item">--}}
-{{--                                <div class="image-additional"><a class="thumbnail  " href="{{ asset('image/product/product5.jpg') }}" title="lorem ippsum dolor dummy"> <img src="{{ asset('image/product/pro-5-220x294.jpg') }}" title="lorem ippsum dolor dummy" alt="lorem ippsum dolor dummy" /></a></div>--}}
-{{--                            </div>--}}
-{{--                            <div class="item">--}}
-{{--                                <div class="image-additional"><a class="thumbnail  " href="{{ asset('image/product/product6.jpg') }}" title="lorem ippsum dolor dummy"> <img src="{{ asset('image/product/pro-6-220x294.jpg') }}" title="lorem ippsum dolor dummy" alt="lorem ippsum dolor dummy" /></a></div>--}}
-{{--                            </div>--}}
-{{--                            <div class="item">--}}
-{{--                                <div class="image-additional"><a class="thumbnail  " href="{{ asset('image/product/product7.jpg') }}" title="lorem ippsum dolor dummy"> <img src="{{ asset('image/product/pro-7-220x294.jpg') }}" title="lorem ippsum dolor dummy" alt="lorem ippsum dolor dummy" /></a></div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
+
                     </div>
                 </div>
                 <div class="col-sm-6">
@@ -152,7 +130,7 @@
                                         <a href="{{ url('product/detail/'.$product->id) }}"> <img src="{{ asset('image/product/pro-1-220x294.jpg') }}" alt="women's clothing" title="women's clothing" class="img-responsive" /> </a>
                                     @endif
                                     <div class="button-group">
-                                        <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
+{{--                                        <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>--}}
                                         @if(in_array($product->id,request()->session()->get('cart')??[]))
                                             <a type="button" id="button-cart" class="btn btn-primary btn-lg btn-block addtocart" >Go To Cart</a>
                                         @else
@@ -163,7 +141,7 @@
                                 </div>
                                 <div class="caption product-detail">
                                     <h4 class="product-name"><a href="{{ url('product/detail/'.$product->id) }}" title="women's clothing">{{ $product->name }}</a></h4>
-                                    <p class="price product-price"> <span class="price-new">$254.00</span> <span class="price-old">$272.00</span> <span class="price-tax">Ex Tax: $210.00</span> </p>
+                                    <p class="price product-price"> <span class="price-new">{{ $product->price }} Ks</span>  </p>
                                 </div>
                             </div>
                         </div>

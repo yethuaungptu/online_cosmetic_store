@@ -31,7 +31,7 @@ class CustomerController extends Controller
 
     public function pdetail($id){
         $product = Product::find($id);
-        $products = Product::all();
+        $products = Product::where('brand_id',$product->brand_id)->get();
         return view('customer.detail',compact('product','products'));
     }
     public function remove($id,Request $request){
@@ -167,5 +167,16 @@ class CustomerController extends Controller
         $brands = Brand::all();
         $products = Product::where('category_id',$request->query('category'))->where('brand_id',$request->query('brand'))->paginate(100);
         return view('customer.products',compact('categories','brands','products'));
+    }
+
+    public function search(Request $request){
+        $categories = Category::all();
+        $brands = Brand::all();
+        $products = Product::where('name','like', '%'.$request->query('key').'%')->paginate(100);
+        return view('customer.products',compact('categories','brands','products'));
+    }
+
+    public function contact(){
+        return view('customer.contactus');
     }
 }

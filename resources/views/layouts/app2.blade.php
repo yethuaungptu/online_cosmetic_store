@@ -242,7 +242,6 @@
                                     <a href="">
                                         <i class="fa fa-shopping-cart"></i>
                                         <span class="menu-title">Order</span>
-                                        <i class="arrow"></i>
                                     </a>
                                     <ul class="collapse">
                                         <li><a href="{{ url('/admin/orders') }}"><i class="fa fa-caret-right"></i> Order List </a></li>
@@ -253,10 +252,15 @@
                                 <li class="list-divider"></li>
                                 <li class="list-header">Our Customer</li>
                                 <li>
-                                    <a href="{{ url('/admin/customers') }}">
+                                    <a href="">
                                         <i class="fa fa-users"></i>
                                         <span class="menu-title">Customer List</span>
+                                        <i class="arrow"></i>
                                     </a>
+                                        <ul class="collapse">
+                                            <li><a href="{{ url('/admin/customers') }}"><i class="fa fa-caret-right"></i> Member Customer List </a></li>
+                                            <li><a href="{{ url('/admin/customersN') }}"><i class="fa fa-caret-right"></i> Normal Customer List</a></li>
+                                        </ul>
                                 </li>
 
                                 <!--Menu list item-->

@@ -29,4 +29,8 @@ class AdminController extends Controller
         $customers = Customer::all();
         return view('customer.list',compact('customers'));
     }
+    public function customersN(){
+        $customers = Customer::all();
+        return view('customer.listN',compact('customers'));
+    }
 }

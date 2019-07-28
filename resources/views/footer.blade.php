@@ -1,17 +1,9 @@
+
 <footer>
     <div class="container">
         <div class="row">
             <div class="footer-top-cms">
                 <div class="col-sm-7">
-                    {{--                    <div class="newslatter">--}}
-                    {{--                        <form>--}}
-                    {{--                            <h5>Newsletter</h5>--}}
-                    {{--                            <div class="input-group">--}}
-                    {{--                                <input type="text" class=" form-control" placeholder="Email Here......">--}}
-                    {{--                                <button type="submit" value="Sign up" class="btn btn-large btn-primary">Subscribe</button>--}}
-                    {{--                            </div>--}}
-                    {{--                        </form>--}}
-                    {{--                    </div>--}}
                 </div>
                 <div class="col-sm-5">
                     <div class="footer-social">
@@ -31,27 +23,27 @@
             <div class="col-sm-3 footer-block">
                 <h5 class="footer-title">Information</h5>
                 <ul class="list-unstyled ul-wrapper">
-                    <li><a href="about-us.html">About Us</a></li>
-                    <li><a href="checkout.html">Delivery Information</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms &amp; Conditions</a></li>
+                    <li><a href="#">About Us</a> <span class="badge badge-info">coming soon</span> </li>
+                    <li><a href=#">Delivery Information</a><span class="badge badge-info">coming soon</span> </li>
+                    <li><a href="#">Privacy Policy</a><span class="badge badge-info">coming soon</span> </li>
+                    <li><a href="#" data-toggle="modal" data-target="#exampleModalCenter">Terms &amp; Conditions</a></li>
                 </ul>
             </div>
             <div class="col-sm-3 footer-block">
                 <h5 class="footer-title">Customer Service</h5>
                 <ul class="list-unstyled ul-wrapper">
-                    <li><a href="contact.html">Contact Us</a></li>
-                    <li><a href="#">Returns</a></li>
-                    <li><a href="#">Site Map</a></li>
-                    <li><a href="#">Wish List</a></li>
+                    <li><a href="{{ url('/contact') }}">Contact Us</a></li>
+                    <li><a href="#">Returns</a><span class="badge badge-info">coming soon</span> </li>
+                    <li><a href="#">Site Map</a><span class="badge badge-info">coming soon</span> </li>
+                    <li><a href="#">Wish List</a><span class="badge badge-info">coming soon</span> </li>
                 </ul>
             </div>
             <div class="col-sm-3 footer-block">
-                <h5 class="footer-title">Extras</h5>
+                <h5 class="footer-title">Extras<span class="badge badge-info">coming soon</span> </h5>
                 <ul class="list-unstyled ul-wrapper">
                     <li><a href="#">Brands</a></li>
-                    <li><a href="gift.html">Gift Vouchers</a></li>
-                    <li><a href="affiliate.html">Affiliates</a></li>
+                    <li><a href="#">Gift Vouchers</a></li>
+                    <li><a href="#">Affiliates</a></li>
                     <li><a href="#">Specials</a></li>
                 </ul>
             </div>
@@ -60,11 +52,11 @@
                     <div class="footer-contact">
                         <h5 class="contact-title footer-title">Contact Us</h5>
                         <ul class="ul-wrapper">
-                            <li><i class="fa fa-map-marker"></i><span class="location2"> Warehouse & Offices,<br>
-                                12345 Street name, California<br>
-                                USA</span></li>
-                            <li><i class="fa fa-envelope"></i><span class="mail2"><a href="#">info@localhost.com</a></span></li>
-                            <li><i class="fa fa-mobile"></i><span class="phone2">+91 0987-654-321</span></li>
+                            <li><i class="fa fa-map-marker"></i><span class="location2"> No 7 Yal Pu San Street<br>
+                                Aung Chan Thar Quart, Pyay<br>
+                                Bago</span></li>
+                            <li><i class="fa fa-envelope"></i><span class="mail2"><a href="mailto:threelady@gmail.com">threelady@gmail.com</a></span></li>
+                            <li><i class="fa fa-mobile"></i><span class="phone2">+959683434349</span></li>
                         </ul>
                     </div>
                 </div>
@@ -84,6 +76,28 @@
                     <li class="discover"><a href="#"><img alt="" src="{{ asset('image/payment/discover.jpg') }}"></a></li>
                     <li class="bank"><a href="#"><img alt="" src="{{ asset('image/payment/bank.jpg') }}"></a></li>
                 </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Terms & Conditions</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul>
+                    <li>All Item will be send by car delivery</li>
+                    <li>If have some trouble, will be decided by admin team</li>
+                    <li>User protection is depending on product</li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

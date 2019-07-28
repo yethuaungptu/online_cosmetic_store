@@ -49,6 +49,10 @@
             text-align: center;
             width: 40%;
         }
+        .modal-backdrop {
+            /* bug fix - no overlay */
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -94,7 +98,7 @@
             </div>
             <div class="col-sm-4 col-xs-6 header-middle">
                 <div class="header-middle-top">
-                    <div id="logo"> <a href="index.html"><img src="{{ asset('image/logo2.gif') }}" title="E-Commerce" width="60%" alt="E-Commerce" class="img-responsive img-thumbnail" /></a> </div>
+                    <div id="logo"> <a href="{{ url('/') }}"><img src="{{ asset('image/logo2.gif') }}" title="E-Commerce" width="60%" alt="E-Commerce" class="img-responsive img-thumbnail" /></a> </div>
                 </div>
             </div>
             <div class="col-sm-4 col-xs-6 header-right">
@@ -141,7 +145,14 @@
                         @endif
                     </ul>
                 </div>
-
+                <div id="search" class="input-group">
+                    <form action="{{ url('/search') }}">
+                    <input type="text" name="key" value="" placeholder="Search" class="form-control input-lg" />
+                    <span class="input-group-btn">
+                    <button type="submit" class="btn btn-default btn-lg"><i class="fa fa-search"></i></button>
+                    </span>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -155,7 +166,7 @@
             <ul class="main-navigation">
                 <li><a href="{{url('/')}}"   class="parent"  >Home</a> </li>
                 <li><a href="{{url('/products')}}"   class="parent"  >All Product</a> </li>
-                <li><a href="#" >Contact us</a></li>
+                <li><a href="{{ url('/contact') }}" >Contact us</a></li>
                 <li><a href="{{ url('customer/invoice') }}" >Last Invoice</a></li>
             </ul>
         </div>
