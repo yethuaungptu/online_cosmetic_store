@@ -120,9 +120,31 @@
                                 <form action="{{ route('brand.destroy', $brand->id)}}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger" type="submit">Delete</button>
+                                    <button class="btn btn-danger" type="button" onclick="ch(this.form,{{ \App\Product::where('brand_id',$brand->id)->count() }})">Delete</button>
                                 </form>
                             </td>
+                            <script>
+                                function ch(f,id){
+                                    swal({
+                                        title: "Are you sure?",
+                                        text: (id > 0)? "This brand use in "+ id+" product(s). So, if you delete this, product(s) will delete which using this brand":"Once deleted, you will not be able to recover this imaginary brand!",
+                                        icon: "warning",
+                                        buttons: true,
+                                        dangerMode: true,
+                                    })
+                                        .then((willDelete) => {
+                                            if (willDelete) {
+                                                swal("Poof! Your imaginary brand has been deleted!", {
+                                                    icon: "success",
+                                                });
+                                                f.submit();
+                                            } else {
+                                                swal("Your imaginary brand is safe!");
+                                            }
+                                        });
+
+                                }
+                            </script>
                         </tr>
                     @endforeach
                     </tbody>

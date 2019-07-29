@@ -19,8 +19,8 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
-    <div id="app">
+<body style="background-color: deepskyblue;">
+    <div id="app" >
         @include('nav')
 
         <main class="py-4">

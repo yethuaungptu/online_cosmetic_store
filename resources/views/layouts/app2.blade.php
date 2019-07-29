@@ -38,6 +38,7 @@
     <script src=" {{ asset('plugins/pace/pace.min.js') }}"></script>
     <script src="{{ asset('js/print.min.js') }}"></script>
     <script src=" {{ asset('js/jquery-2.1.1.min.js') }}"></script>
+    <script src="{{ asset('javascript/sweetalert.min.js') }}"></script>
 
 </head>
 <!--TIPS-->

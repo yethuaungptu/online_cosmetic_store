@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Brand;
+use App\Product;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
@@ -77,6 +78,7 @@ class BrandController extends Controller
     public function destroy(Brand $brand)
     {
         $brand->delete();
+        Product::where('brand_id',$brand->id)->delete();
 
         return redirect('admin/brand')->with('success', 'Brand deleted!');
     }

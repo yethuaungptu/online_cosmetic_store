@@ -114,9 +114,31 @@
                                 <form action="{{ route('category.destroy', $category->id)}}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger" type="submit">Delete</button>
+                                    <button class="btn btn-danger" type="button" onclick="ch(this.form, {{ \App\Product::where('category_id',$category->id)->count() }})">Delete</button>
                                 </form>
                             </td>
+                            <script>
+                                function ch(f,id){
+                                    swal({
+                                        title: "Are you sure?",
+                                        text: (id > 0)? "This category use in "+ id+" product(s). So, if you delete this, product(s) will delete which using this category":"Once deleted, you will not be able to recover this imaginary category!",
+                                        icon: "warning",
+                                        buttons: true,
+                                        dangerMode: true,
+                                    })
+                                        .then((willDelete) => {
+                                            if (willDelete) {
+                                                swal("Poof! Your imaginary category has been deleted!", {
+                                                    icon: "success",
+                                                });
+                                                f.submit();
+                                            } else {
+                                                swal("Your imaginary category is safe!");
+                                            }
+                                        });
+
+                                }
+                            </script>
                         </tr>
                     @endforeach
                     </tbody>
