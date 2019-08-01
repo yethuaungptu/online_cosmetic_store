@@ -89,7 +89,7 @@
                                 @endif
                             </a>
                             <div class="button-group">
-                                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
+{{--                                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>--}}
                                 @if(in_array($product->id,request()->session()->get('cart')??[]))
                                     <a role="button" id="button-cart" href="{{ url('customer/cartview') }}" class="btn btn-primary btn-lg btn-block addtocart" >Go To Cart</a>
                                 @else
@@ -104,7 +104,7 @@
 
                         </div>
                         <div class="button-group">
-                            <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
+{{--                            <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>--}}
                             @if(in_array($product->id,request()->session()->get('cart')??[]))
                                 <a role="button" id="button-cart" href="{{ url('customer/cartview') }}" class="btn btn-primary btn-lg btn-block addtocart-btn" >Go To Cart</a>
                             @else
